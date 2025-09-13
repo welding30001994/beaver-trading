@@ -1,0 +1,1543 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIPFOREX - Plataforma de Trading Social</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@400;500;600;700&family=Exo+2:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon-gold: #ffd700;
+            --neon-platinum: #e5e4e2;
+            --neon-diamond: #b9f2ff;
+            --neon-vip: #ff00ff;
+            --neon-cyan: #00ffff;
+            --dark-cosmic: #0a0a1a;
+            --darker-space: #050510;
+            --deep-space: #03030f;
+            --star-light: rgba(255, 255, 255, 0.9);
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --gold-glow: 0 0 10px var(--neon-gold), 0 0 20px rgba(255, 215, 0, 0.5);
+            --vip-glow: 0 0 15px var(--neon-vip), 0 0 30px rgba(255, 0, 255, 0.4);
+            --cyan-glow: 0 0 15px var(--neon-cyan), 0 0 30px rgba(0, 255, 255, 0.4);
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Exo 2', sans-serif;
+            background-color: var(--deep-space);
+            color: var(--star-light);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                url('https://raw.githubusercontent.com/welding30001994/vip/refs/heads/main/leon_con_fuego_con_el_nombre_vipforex%20(1).jpeg'),
+                radial-gradient(circle at 15% 15%, rgba(255, 215, 0, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 85% 85%, rgba(255, 0, 255, 0.1) 0%, transparent 40%);
+            background-size: cover, 100% 100%, 100% 100%;
+            background-position: center;
+            background-blend-mode: overlay;
+            opacity: 0.2;
+            z-index: -2;
+        }
+        
+        /* Efectos futuristas VIP */
+        .vip-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.05;
+            background: 
+                linear-gradient(0deg, transparent 48%, var(--neon-gold) 49%, var(--neon-gold) 51%, transparent 52%),
+                linear-gradient(90deg, transparent 48%, var(--neon-vip) 49%, var(--neon-vip) 51%, transparent 52%);
+            background-size: 20px 20px;
+            animation: grid-move 20s infinite linear;
+        }
+        
+        @keyframes grid-move {
+            0% { background-position: 0 0; }
+            100% { background-position: 20px 20px; }
+        }
+        
+        .floating-diamonds {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .diamond {
+            position: absolute;
+            opacity: 0.1;
+            background: var(--neon-diamond);
+            width: 10px;
+            height: 10px;
+            transform: rotate(45deg);
+            filter: blur(2px);
+            animation: float-diamond 20s infinite linear;
+        }
+        
+        @keyframes float-diamond {
+            0%, 100% { transform: translate(0, 0) rotate(45deg); opacity: 0.1; }
+            25% { transform: translate(100px, 50px) rotate(90deg); opacity: 0.15; }
+            50% { transform: translate(50px, 100px) rotate(135deg); opacity: 0.2; }
+            75% { transform: translate(-50px, 50px) rotate(180deg); opacity: 0.15; }
+        }
+        
+        .vip-particles {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .vip-particle {
+            position: absolute;
+            background: var(--neon-gold);
+            border-radius: 50%;
+            opacity: 0.4;
+            animation: float-vip linear infinite;
+        }
+        
+        @keyframes float-vip {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.4;
+            }
+            90% {
+                opacity: 0.4;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px);
+                opacity: 0;
+            }
+        }
+        
+        .container {
+            max-width: 100%;
+            padding: 15px;
+            box-sizing: border-box;
+            z-index: 1;
+        }
+        
+        /* Header mejorado */
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+            padding: 20px 10px;
+            position: relative;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+        }
+        
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--neon-gold) 0%, var(--neon-vip) 50%, var(--neon-cyan) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: var(--vip-glow);
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+        
+        .logo i {
+            margin-right: 15px;
+            font-size: 2.5rem;
+            color: var(--neon-gold);
+            filter: drop-shadow(0 0 8px var(--neon-gold));
+        }
+        
+        .header p {
+            color: var(--star-light);
+            margin-top: 8px;
+            font-size: 1.1rem;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+            opacity: 0.9;
+        }
+        
+        /* Menú móvil hamburguesa VIP */
+        .mobile-menu-btn {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(25, 25, 45, 0.8);
+            border: 1px solid var(--neon-gold);
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+            backdrop-filter: blur(10px);
+        }
+        
+        .mobile-menu-btn span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--neon-gold);
+            margin: 3px 0;
+            transition: var(--transition);
+            border-radius: 2px;
+        }
+        
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 80%;
+            height: 100vh;
+            background: linear-gradient(135deg, rgba(15, 15, 35, 0.95), rgba(25, 15, 45, 0.95));
+            z-index: 999;
+            padding: 80px 25px 25px;
+            transition: left 0.4s ease;
+            box-shadow: 5px 0 30px rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(15px);
+            border-right: 1px solid var(--neon-gold);
+        }
+        
+        .mobile-menu.active {
+            left: 0;
+        }
+        
+        .mobile-menu ul {
+            list-style: none;
+        }
+        
+        .mobile-menu ul li {
+            padding: 18px 0;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+        }
+        
+        .mobile-menu ul li a {
+            color: var(--star-light);
+            text-decoration: none;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: var(--transition);
+        }
+        
+        .mobile-menu ul li a:hover {
+            color: var(--neon-gold);
+            text-shadow: var(--gold-glow);
+        }
+        
+        .mobile-menu ul li a i {
+            font-size: 1.3rem;
+            width: 25px;
+        }
+        
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 998;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+        
+        .menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Mejora de cajas de comentarios VIP */
+        .comment-box, .comment {
+            background: linear-gradient(135deg, rgba(15, 15, 35, 0.8), rgba(25, 15, 45, 0.8));
+            padding: 25px;
+            border-radius: 20px;
+            width: 100%;
+            margin: 20px 0;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+            border: 2px solid var(--neon-gold);
+            backdrop-filter: blur(15px);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .comment-box::before, .comment::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--neon-gold), var(--neon-vip), var(--neon-cyan), var(--neon-gold));
+            background-size: 400%;
+            z-index: -1;
+            animation: border-glowing 4s linear infinite;
+            border-radius: 22px;
+            opacity: 0.7;
+        }
+        
+        @keyframes border-glowing {
+            0% { background-position: 0 0; }
+            50% { background-position: 300% 0; }
+            100% { background-position: 0 0; }
+        }
+        
+        .comment-box:hover, .comment:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(255, 215, 0, 0.3);
+        }
+        
+        .input-container {
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+
+        .comment-box input {
+            flex: 1;
+            padding: 16px 20px;
+            border: none;
+            border-radius: 30px;
+            outline: none;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--star-light);
+            font-size: 1.1rem;
+            min-height: 55px;
+            font-family: 'Exo 2', sans-serif;
+        }
+        
+        .comment-box input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .comment-box button, .reply-button {
+            background: linear-gradient(135deg, var(--neon-gold), var(--neon-vip));
+            color: var(--dark-cosmic);
+            padding: 16px 25px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 700;
+            margin-left: 12px;
+            transition: var(--transition);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            font-size: 1.1rem;
+            min-width: 55px;
+            height: 55px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .comment-box button:hover, .reply-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.7);
+        }
+        
+        .comment-box button:active, .reply-button:active {
+            transform: translateY(1px) scale(1);
+        }
+        
+        .post-image-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--neon-gold), var(--neon-vip));
+            color: var(--dark-cosmic);
+            margin-left: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+            flex-shrink: 0;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            font-size: 1.3rem;
+        }
+
+        .post-image-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.7);
+        }
+        
+        .comment p {
+            font-weight: 700;
+            margin: 0 0 12px 0;
+            color: var(--star-light);
+            font-size: 1.2rem;
+        }
+        
+        .comment .content {
+            margin-bottom: 18px;
+        }
+        
+        .actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            font-size: 1rem;
+            border-top: 1px solid rgba(255, 215, 0, 0.3);
+            padding-top: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .actions span {
+            cursor: pointer;
+            margin-right: 18px;
+            display: flex;
+            align-items: center;
+            transition: var(--transition);
+            margin-bottom: 10px;
+            padding: 8px 15px;
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.08);
+        }
+        
+        .actions span:hover {
+            color: var(--neon-gold);
+            background: rgba(255, 215, 0, 0.15);
+            text-shadow: var(--gold-glow);
+        }
+        
+        .actions span i {
+            margin-right: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .replies {
+            display: none;
+            margin-left: 20px;
+            padding-left: 20px;
+            border-left: 3px solid var(--neon-vip);
+            width: calc(100% - 20px);
+        }
+        
+        .replies .comment {
+            width: 100%;
+            background: rgba(30, 30, 50, 0.9);
+            padding: 20px;
+            border-radius: 18px;
+            margin: 15px 0;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--neon-vip);
+        }
+        
+        #commentsSection {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            align-items: center;
+        }
+        
+        .comment img {
+            max-width: 100%;
+            margin-top: 15px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+        
+        .signal-tag {
+            display: inline-block;
+            background: rgba(255, 215, 0, 0.2);
+            color: var(--neon-gold);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            border: 1px solid var(--neon-gold);
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+            font-weight: 600;
+        }
+        
+        .signal-buy {
+            background: rgba(0, 255, 0, 0.2);
+            color: #00ff00;
+            border-color: #00ff00;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+        }
+        
+        .signal-sell {
+            background: rgba(255, 0, 0, 0.2);
+            color: #ff0000;
+            border-color: #ff0000;
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+        }
+        
+        .signal-info {
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 15px;
+            gap: 10px;
+        }
+        
+        .signal-input {
+            margin-top: 20px;
+            display: none;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .signal-input select, .signal-input input {
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            background: rgba(0, 0, 0, 0.3);
+            color: var(--star-light);
+            font-size: 1rem;
+            flex: 1;
+            min-width: 140px;
+            font-family: 'Exo 2', sans-serif;
+        }
+        
+        .timestamp {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 10px;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(255, 215, 0, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); }
+        }
+        
+        .live-signal {
+            animation: pulse 2s infinite;
+            position: relative;
+        }
+        
+        .live-signal::after {
+            content: 'LIVE';
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #ff0000;
+            color: white;
+            font-size: 0.8rem;
+            padding: 4px 10px;
+            border-radius: 15px;
+            animation: pulse 1.5s infinite;
+            font-weight: bold;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .toggle-signal {
+            background: none;
+            border: none;
+            color: var(--neon-gold);
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            border-radius: 25px;
+            background: rgba(255, 215, 0, 0.1);
+            transition: var(--transition);
+            font-weight: 600;
+        }
+        
+        .toggle-signal:hover {
+            background: rgba(255, 215, 0, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .toggle-signal i {
+            margin-right: 10px;
+        }
+        
+        /* Login styles mejorado VIP */
+        .login-container {
+            display: none;
+            background: linear-gradient(135deg, rgba(15, 15, 35, 0.9), rgba(25, 15, 45, 0.9));
+            padding: 30px;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 450px;
+            margin: 40px auto;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+            text-align: center;
+            border: 2px solid var(--neon-gold);
+            backdrop-filter: blur(15px);
+        }
+        
+        .login-container h2 {
+            margin-top: 0;
+            background: linear-gradient(135deg, var(--neon-gold), var(--neon-vip));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 2.2rem;
+            margin-bottom: 25px;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .login-container input {
+            width: 100%;
+            padding: 16px;
+            margin: 12px 0;
+            border: none;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--star-light);
+            font-size: 1.1rem;
+            font-family: 'Exo 2', sans-serif;
+        }
+        
+        .login-container button {
+            width: 100%;
+            padding: 16px;
+            margin: 20px 0;
+            background: linear-gradient(135deg, var(--neon-gold), var(--neon-vip));
+            color: var(--dark-cosmic);
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .login-container button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.7);
+        }
+        
+        .login-message {
+            margin-top: 18px;
+            color: #ff5555;
+            font-size: 1rem;
+        }
+        
+        /* User info mejorado VIP */
+        .user-info {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, rgba(15, 15, 35, 0.8), rgba(25, 15, 45, 0.8));
+            padding: 10px 18px;
+            border-radius: 30px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            z-index: 100;
+            max-width: calc(100% - 40px);
+            border: 1px solid var(--neon-gold);
+            backdrop-filter: blur(15px);
+        }
+        
+        .user-info img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 12px;
+            border: 1px solid var(--neon-gold);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+        }
+        
+        .user-info span {
+            font-size: 1rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 180px;
+            font-weight: 600;
+        }
+        
+        .user-info button {
+            background: rgba(255, 0, 0, 0.3);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 8px 15px;
+            font-size: 0.9rem;
+            margin-left: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+        }
+
+        .user-info button:hover {
+            background: rgba(255, 0, 0, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .preview-container {
+            display: flex;
+            align-items: center;
+            margin-top: 15px;
+        }
+        
+        .preview-container img {
+            max-width: 70px;
+            max-height: 70px;
+            border-radius: 10px;
+            margin-left: 12px;
+            display: none;
+            border: 1px solid var(--neon-gold);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+        }
+
+        .delete-btn {
+            background: rgba(255, 0, 0, 0.3) !important;
+            color: white !important;
+            border: none;
+            border-radius: 20px;
+            padding: 8px 15px;
+            font-size: 0.9rem;
+            margin-left: 12px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            transition: var(--transition);
+            font-weight: 600;
+        }
+
+        .delete-btn:hover {
+            background: rgba(255, 0, 0, 0.5) !important;
+            transform: translateY(-2px);
+        }
+
+        .delete-btn i {
+            margin-right: 8px;
+        }
+
+        /* Botón flotante para móviles VIP */
+        .floating-action-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--neon-gold), var(--neon-vip));
+            color: var(--dark-cosmic);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+            z-index: 99;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            font-size: 1.8rem;
+        }
+        
+        .floating-action-btn:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 12px 30px rgba(255, 215, 0, 0.6);
+        }
+
+        /* Responsive adjustments mejorados */
+        @media (max-width: 768px) {
+            .container {
+                padding: 12px;
+            }
+            
+            .header {
+                padding: 18px 8px;
+                margin-bottom: 20px;
+            }
+            
+            .logo {
+                font-size: 2rem;
+            }
+            
+            .logo i {
+                font-size: 2rem;
+            }
+            
+            .header p {
+                font-size: 1rem;
+            }
+            
+            .mobile-menu-btn {
+                display: flex;
+            }
+            
+            .comment-box, .comment {
+                padding: 20px;
+                border-radius: 18px;
+            }
+            
+            .comment-box input {
+                padding: 14px 18px;
+                font-size: 1rem;
+                min-height: 50px;
+            }
+            
+            .comment-box button, .reply-button {
+                padding: 14px 20px;
+                font-size: 1rem;
+                min-width: 50px;
+                height: 50px;
+            }
+            
+            .post-image-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+            
+            .user-info {
+                top: 85px;
+                right: 15px;
+                padding: 8px 15px;
+            }
+            
+            .user-info span {
+                max-width: 140px;
+                font-size: 0.9rem;
+            }
+            
+            .signal-input {
+                flex-direction: column;
+            }
+            
+            .signal-input select, .signal-input input {
+                width: 100%;
+                min-width: auto;
+            }
+            
+            .floating-action-btn {
+                bottom: 25px;
+                right: 25px;
+                width: 60px;
+                height: 60px;
+                font-size: 1.6rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.8rem;
+            }
+            
+            .logo i {
+                font-size: 1.8rem;
+                margin-right: 10px;
+            }
+            
+            .header p {
+                font-size: 0.95rem;
+            }
+            
+            .comment-box, .comment {
+                padding: 18px;
+            }
+            
+            .input-container {
+                flex-direction: column;
+            }
+            
+            .comment-box input {
+                width: 100%;
+                margin-bottom: 12px;
+            }
+            
+            .comment-box .input-container > * {
+                margin: 6px 0;
+            }
+            
+            .post-image-btn {
+                margin-left: 0;
+                order: 2;
+            }
+            
+            .comment-box button {
+                margin-left: 0;
+                width: 100%;
+                order: 3;
+            }
+            
+            .actions {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .actions span {
+                margin-bottom: 12px;
+            }
+            
+            .user-info {
+                top: 80px;
+                padding: 7px 12px;
+            }
+            
+            .user-info span {
+                max-width: 120px;
+                font-size: 0.85rem;
+            }
+            
+            .user-info img {
+                width: 35px;
+                height: 35px;
+            }
+            
+            .floating-action-btn {
+                bottom: 20px;
+                right: 20px;
+                width: 55px;
+                height: 55px;
+                font-size: 1.5rem;
+            }
+            
+            .login-container {
+                padding: 25px 20px;
+            }
+            
+            .login-container h2 {
+                font-size: 1.8rem;
+            }
+            
+            .login-container input, .login-container button {
+                padding: 14px;
+            }
+        }
+
+        @media (max-width: 350px) {
+            .logo {
+                font-size: 1.6rem;
+            }
+            
+            .user-info span {
+                max-width: 100px;
+            }
+            
+            .signal-tag {
+                font-size: 0.85rem;
+                padding: 6px 12px;
+            }
+        }
+
+        /* Efectos de scroll personalizados */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(var(--neon-gold), var(--neon-vip));
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(var(--neon-vip), var(--neon-gold));
+        }
+    </style>
+</head>
+<body>
+    <!-- Efectos futuristas VIP -->
+    <div class="vip-grid"></div>
+    <div class="floating-diamonds">
+        <div class="diamond" style="top: 10%; left: 20%; animation-delay: 0s;"></div>
+        <div class="diamond" style="top: 30%; left: 80%; animation-delay: 5s;"></div>
+        <div class="diamond" style="top: 70%; left: 40%; animation-delay: 10s;"></div>
+        <div class="diamond" style="top: 50%; left: 60%; animation-delay: 15s;"></div>
+    </div>
+    <div class="vip-particles" id="vipParticles"></div>
+    
+    <!-- Menú móvil -->
+    <div class="mobile-menu-btn" id="mobileMenuBtn">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    
+    <div class="mobile-menu" id="mobileMenu">
+        <ul>
+            <li><a href="#"><i class="fas fa-home"></i> Inicio</a></li>
+            <li><a href="#"><i class="fas fa-chart-line"></i> Señales</a></li>
+            <li><a href="#"><i class="fas fa-users"></i> Comunidad</a></li>
+            <li><a href="#"><i class="fas fa-cog"></i> Configuración</a></li>
+            <li><a href="#"><i class="fas fa-question-circle"></i> Ayuda</a></li>
+        </ul>
+    </div>
+    
+    <div class="menu-overlay" id="menuOverlay"></div>
+    
+    <!-- Botón flotante para nueva publicación -->
+    <button class="floating-action-btn" id="newPostBtn">
+        <i class="fas fa-plus"></i>
+    </button>
+    
+    <div class="container">
+        <div class="login-container" id="loginContainer">
+            <h2>INICIAR SESIÓN</h2>
+            <input type="email" id="loginEmail" placeholder="Correo electrónico">
+            <input type="password" id="loginPassword" placeholder="Contraseña">
+            <button onclick="login()">ACCEDER VIP</button>
+            <div class="login-message" id="loginMessage"></div>
+        </div>
+
+        <div id="appContent" style="display: none;">
+            <div class="user-info" id="userInfo">
+                <img id="userPhoto" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png">
+                <span id="userName">Usuario VIP</span>
+                <button onclick="logout()">Salir</button>
+            </div>
+            
+            <div class="header">
+                <div class="header-content">
+                    <div class="logo">
+                        <i class="fas fa-crown"></i>
+                        <span>VIPFOREX</span>
+                    </div>
+                    <p>Plataforma de trading social para traders de élite</p>
+                </div>
+            </div>
+            
+            <div class="comment-box" id="mainCommentBox">
+                <div class="input-container">
+                    <input type="text" id="commentInput" placeholder="Comparte tu análisis o señal...">
+                    <div class="post-image-btn" onclick="document.getElementById('imageInput').click()">
+                        <i class="fas fa-image"></i>
+                    </div>
+                    <input type="file" id="imageInput" accept="image/*" style="display: none;">
+                    <button id="postButton" onclick="postComment()"><i class="fas fa-paper-plane"></i></button>
+                </div>
+                
+                <div class="preview-container">
+                    <img id="imagePreview" class="preview-image">
+                </div>
+                
+                <div class="signal-input" id="signalInput">
+                    <select id="signalType">
+                        <option value="buy">COMPRA</option>
+                        <option value="sell">VENTA</option>
+                        <option value="analysis">ANÁLISIS</option>
+                    </select>
+                    <input type="text" id="assetInput" placeholder="Activo (EUR/USD)">
+                    <input type="text" id="priceInput" placeholder="Precio entrada">
+                    <input type="text" id="targetInput" placeholder="Objetivo">
+                    <input type="text" id="stopInput" placeholder="Stop Loss">
+                </div>
+                
+                <button class="toggle-signal" onclick="toggleSignalInput()">
+                    <i class="fas fa-chart-line"></i> AÑADIR SEÑAL VIP
+                </button>
+            </div>
+
+            <div id="commentsSection"></div>
+        </div>
+    </div>
+
+    <!-- Import Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-storage-compat.js"></script>
+
+    <script>
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyD3MI1klgBSHs1h6QT4VPNoScCfCwMV_Ck",
+            authDomain: "usuario-b0384.firebaseapp.com",
+            databaseURL: "https://usuario-b0384-default-rtdb.firebaseio.com",
+            projectId: "usuario-b0384",
+            storageBucket: "usuario-b0384.appspot.com",
+            messagingSenderId: "196266170863",
+            appId: "1:196266170863:web:4ea57f489df94aba94fe1a"
+        };
+
+        // Initialize Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const database = firebase.database();
+        const storage = firebase.storage();
+
+        // Variables globales
+        let selectedImage = null;
+        let showSignalInput = false;
+        let currentUser = null;
+
+        // Crear partículas VIP
+        function createVipParticles() {
+            const particlesContainer = document.getElementById('vipParticles');
+            for (let i = 0; i < 60; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('vip-particle');
+                
+                // Tamaño aleatorio entre 1px y 4px
+                const size = Math.random() * 3 + 1;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // Posición inicial aleatoria
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.bottom = `-${size}px`;
+                
+                // Duración de la animación aleatoria
+                const duration = Math.random() * 25 + 15;
+                particle.style.animationDuration = `${duration}s`;
+                
+                // Retraso aleatorio
+                particle.style.animationDelay = `${Math.random() * 15}s`;
+                
+                // Color aleatorio (dorado, violeta o cian)
+                const colors = ['#ffd700', '#ff00ff', '#00ffff'];
+                const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.background = randomColor;
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Cargar cuando el DOM esté listo
+        document.addEventListener('DOMContentLoaded', function() {
+            createVipParticles();
+            
+            // Configurar menú móvil
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const menuOverlay = document.getElementById('menuOverlay');
+            
+            mobileMenuBtn.addEventListener('click', function() {
+                mobileMenu.classList.toggle('active');
+                menuOverlay.classList.toggle('active');
+            });
+            
+            menuOverlay.addEventListener('click', function() {
+                mobileMenu.classList.remove('active');
+                menuOverlay.classList.remove('active');
+            });
+            
+            // Configurar botón flotante
+            const newPostBtn = document.getElementById('newPostBtn');
+            const mainCommentBox = document.getElementById('mainCommentBox');
+            
+            newPostBtn.addEventListener('click', function() {
+                mainCommentBox.scrollIntoView({ behavior: 'smooth' });
+                document.getElementById('commentInput').focus();
+            });
+            
+            // Escuchar cambios en la autenticación
+            auth.onAuthStateChanged(user => {
+                if (user) {
+                    // Usuario logueado
+                    currentUser = user;
+                    showAppContent();
+                    loadComments();
+                    updateUserInfo();
+                } else {
+                    // No hay usuario logueado
+                    showLoginForm();
+                }
+            });
+            
+            // Configurar evento de subida de imagen
+            document.getElementById('imageInput').addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    selectedImage = file;
+                    showPreview(file);
+                }
+            });
+        });
+
+        // Mostrar formulario de login
+        function showLoginForm() {
+            document.getElementById('loginContainer').style.display = 'block';
+            document.getElementById('appContent').style.display = 'none';
+        }
+
+        // Mostrar contenido de la app
+        function showAppContent() {
+            document.getElementById('loginContainer').style.display = 'none';
+            document.getElementById('appContent').style.display = 'block';
+        }
+
+        // Actualizar información del usuario
+        function updateUserInfo() {
+            if (currentUser) {
+                document.getElementById('userName').textContent = currentUser.displayName || currentUser.email.split('@')[0] + " VIP";
+                if (currentUser.photoURL) {
+                    document.getElementById('userPhoto').src = currentUser.photoURL;
+                }
+            }
+        }
+
+        // Iniciar sesión
+        function login() {
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            const message = document.getElementById('loginMessage');
+            
+            message.textContent = '';
+            
+            auth.signInWithEmailAndPassword(email, password)
+                .catch(error => {
+                    message.textContent = error.message;
+                });
+        }
+
+        // Cerrar sesión
+        function logout() {
+            auth.signOut();
+        }
+
+        // Mostrar vista previa de imagen
+        function showPreview(file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const preview = document.getElementById("imagePreview");
+                preview.src = e.target.result;
+                preview.style.display = "block";
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // Alternar visibilidad de inputs de señal
+        function toggleSignalInput() {
+            showSignalInput = !showSignalInput;
+            updateSignalInputVisibility();
+        }
+
+        function updateSignalInputVisibility() {
+            const signalInput = document.getElementById("signalInput");
+            signalInput.style.display = showSignalInput ? "flex" : "none";
+            
+            const postButton = document.getElementById("postButton");
+            postButton.innerHTML = showSignalInput 
+                ? '<i class="fas fa-bolt"></i>' 
+                : '<i class="fas fa-paper-plane"></i>';
+        }
+
+        // Publicar comentario
+        function postComment() {
+            if (!currentUser) return;
+            
+            const input = document.getElementById("commentInput");
+            const commentText = input.value.trim();
+            
+            const signalType = document.getElementById("signalType").value;
+            const asset = document.getElementById("assetInput").value.trim();
+            const price = document.getElementById("priceInput").value.trim();
+            const target = document.getElementById("targetInput").value.trim();
+            const stop = document.getElementById("stopInput").value.trim();
+            
+            const hasSignal = showSignalInput && (asset || price || target || stop);
+            
+            if (commentText !== "" || selectedImage || hasSignal) {
+                const comment = {
+                    userId: currentUser.uid,
+                    userEmail: currentUser.email,
+                    userName: currentUser.displayName || currentUser.email.split('@')[0] + " VIP",
+                    userPhoto: currentUser.photoURL || 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
+                    text: commentText,
+                    hasImage: selectedImage ? true : false,
+                    timestamp: firebase.database.ServerValue.TIMESTAMP,
+                    likes: 0,
+                    replies: {},
+                    signal: hasSignal ? {
+                        type: signalType,
+                        asset: asset,
+                        price: price,
+                        target: target,
+                        stop: stop,
+                        isLive: true
+                    } : null
+                };
+                
+                // Subir imagen si existe
+                if (selectedImage) {
+                    const storageRef = storage.ref(`comments/${currentUser.uid}/${Date.now()}_${selectedImage.name}`);
+                    const uploadTask = storageRef.put(selectedImage);
+                    
+                    uploadTask.on('state_changed', 
+                        null, 
+                        (error) => {
+                            console.error("Error uploading image:", error);
+                            saveCommentToDatabase(comment);
+                        }, 
+                        () => {
+                            uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+                                comment.imageUrl = downloadURL;
+                                saveCommentToDatabase(comment);
+                            });
+                        }
+                    );
+                } else {
+                    saveCommentToDatabase(comment);
+                }
+                
+                // Limpiar inputs
+                input.value = "";
+                document.getElementById("imageInput").value = "";
+                document.getElementById("imagePreview").style.display = "none";
+                selectedImage = null;
+                
+                if (showSignalInput) {
+                    document.getElementById("assetInput").value = "";
+                    document.getElementById("priceInput").value = "";
+                    document.getElementById("targetInput").value = "";
+                    document.getElementById("stopInput").value = "";
+                    showSignalInput = false;
+                    updateSignalInputVisibility();
+                }
+            }
+        }
+
+        // Guardar comentario en Firebase
+        function saveCommentToDatabase(comment) {
+            const newCommentRef = database.ref('comments').push();
+            newCommentRef.set(comment)
+                .catch(error => {
+                    console.error("Error saving comment:", error);
+                });
+        }
+
+        // Cargar comentarios desde Firebase
+        function loadComments() {
+            database.ref('comments').orderByChild('timestamp').on('value', snapshot => {
+                const commentsSection = document.getElementById("commentsSection");
+                commentsSection.innerHTML = '';
+                
+                const comments = [];
+                snapshot.forEach(childSnapshot => {
+                    const comment = childSnapshot.val();
+                    comment.id = childSnapshot.key;
+                    comments.unshift(comment); // Orden inverso (más nuevos primero)
+                });
+                
+                comments.forEach(comment => {
+                    renderComment(comment);
+                });
+            });
+        }
+
+        // Renderizar comentario en el DOM
+        function renderComment(comment) {
+            const commentContainer = document.createElement("div");
+            commentContainer.classList.add("comment");
+            if (comment.signal?.isLive) {
+                commentContainer.classList.add("live-signal");
+            }
+            
+            const timestamp = new Date(comment.timestamp).toLocaleString();
+            
+            let signalHTML = '';
+            if (comment.signal) {
+                const signalTypeClass = comment.signal.type === 'buy' ? 'signal-buy' : 
+                                       comment.signal.type === 'sell' ? 'signal-sell' : '';
+                
+                signalHTML = `
+                    <div class="signal-info">
+                        ${comment.signal.asset ? `<span class="signal-tag ${signalTypeClass}"><i class="fas fa-${comment.signal.type === 'buy' ? 'arrow-up' : 'arrow-down'}"></i> ${comment.signal.asset}</span>` : ''}
+                        ${comment.signal.price ? `<span class="signal-tag"><i class="fas fa-tag"></i> ${comment.signal.price}</span>` : ''}
+                        ${comment.signal.target ? `<span class="signal-tag"><i class="fas fa-bullseye"></i> ${comment.signal.target}</span>` : ''}
+                        ${comment.signal.stop ? `<span class="signal-tag"><i class="fas fa-shield-alt"></i> ${comment.signal.stop}</span>` : ''}
+                    </div>
+                `;
+            }
+            
+            let imageHTML = '';
+            if (comment.imageUrl) {
+                imageHTML = `<img src="${comment.imageUrl}" alt="Imagen adjunta">`;
+            }
+            
+            // Botón de eliminar solo para el autor
+            let deleteButton = '';
+            if (currentUser && comment.userId === currentUser.uid) {
+                deleteButton = `<button class="delete-btn" onclick="deleteComment('${comment.id}')"><i class="fas fa-trash"></i> Eliminar</button>`;
+            }
+            
+            commentContainer.innerHTML = `
+                <div class="content">
+                    <div style="display: flex; align-items: center; margin-bottom: 12px;">
+                        <img src="${comment.userPhoto}" style="width: 40px; height: 40px; border-radius: 50%; margin-right: 12px; border: 1px solid var(--neon-gold); box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);">
+                        <span style="font-weight: bold; font-size: 1.1rem;">${comment.userName}</span>
+                    </div>
+                    <p style="font-size: 1.1rem;">${comment.text || (comment.signal ? 'Señal de trading VIP' : 'Publicación')}</p>
+                    ${signalHTML}
+                    <div class="timestamp">${timestamp}</div>
+                    ${imageHTML}
+                </div>
+                <div class="actions">
+                    <span onclick="likeComment('${comment.id}', ${comment.likes || 0})"><i class="fas fa-thumbs-up"></i> Me gusta (<span class="like-count">${comment.likes || 0}</span>)</span>
+                    <span onclick="toggleReplies(this, '${comment.id}')"><i class="fas fa-comment"></i> Comentar</span>
+                    ${deleteButton}
+                </div>
+                <div class="replies" id="replies-${comment.id}">
+                    ${comment.replies ? renderReplies(comment.replies, comment.id) : ''}
+                </div>
+            `;
+            
+            document.getElementById("commentsSection").appendChild(commentContainer);
+        }
+
+        // Renderizar respuestas
+        function renderReplies(replies, commentId) {
+            let repliesHTML = '';
+            for (const replyId in replies) {
+                const reply = replies[replyId];
+                const timestamp = new Date(reply.timestamp).toLocaleString();
+                
+                let deleteButton = '';
+                if (currentUser && reply.userId === currentUser.uid) {
+                    deleteButton = `<button class="delete-btn" onclick="deleteReply('${commentId}', '${replyId}')"><i class="fas fa-trash"></i></button>`;
+                }
+                
+                repliesHTML += `
+                    <div class="comment reply" id="reply-${commentId}-${replyId}">
+                        <div class="content">
+                            <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                                <img src="${reply.userPhoto}" style="width: 35px; height: 35px; border-radius: 50%; margin-right: 10px; border: 1px solid rgba(255, 215, 0, 0.3);">
+                                <span style="font-size: 1rem; font-weight: bold;">${reply.userName}</span>
+                            </div>
+                            <p style="margin: 8px 0; font-size: 1rem;">${reply.text}</p>
+                            <div class="timestamp" style="font-size: 0.9rem;">${timestamp}</div>
+                            ${deleteButton}
+                        </div>
+                    </div>
+                `;
+            }
+            
+            // Añadir caja de respuesta
+            repliesHTML += `
+                <div class="reply-box" style="margin-top: 15px; display: flex; align-items: center;">
+                    <input type="text" class="reply-input" placeholder="Escribe una respuesta..." style="flex: 1; padding: 12px; border-radius: 25px; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.1); color: white; font-size: 1rem;">
+                    <button class="reply-button" onclick="postReply(this, '${commentId}')" style="margin-left: 10px;"><i class="fas fa-reply"></i></button>
+                </div>
+            `;
+            
+            return repliesHTML;
+        }
+
+        // Dar like a un comentario
+        function likeComment(commentId, currentLikes) {
+            if (!currentUser) return;
+            
+            const newLikes = (currentLikes || 0) + 1;
+            database.ref(`comments/${commentId}/likes`).set(newLikes);
+        }
+
+        // Alternar visibilidad de respuestas
+        function toggleReplies(element, commentId) {
+            const commentElement = element.closest('.comment');
+            const repliesDiv = commentElement.querySelector('.replies');
+            
+            if (repliesDiv.style.display === "none" || repliesDiv.style.display === "") {
+                repliesDiv.style.display = "block";
+            } else {
+                repliesDiv.style.display = "none";
+            }
+        }
+
+        // Publicar respuesta
+        function postReply(button, commentId) {
+            if (!currentUser) return;
+            
+            const replyInput = button.previousElementSibling;
+            const replyText = replyInput.value.trim();
+            
+            if (replyText !== "") {
+                const reply = {
+                    userId: currentUser.uid,
+                    userEmail: currentUser.email,
+                    userName: currentUser.displayName || currentUser.email.split('@')[0] + " VIP",
+                    userPhoto: currentUser.photoURL || 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
+                    text: replyText,
+                    timestamp: firebase.database.ServerValue.TIMESTAMP
+                };
+                
+                // Guardar respuesta en Firebase
+                const newReplyRef = database.ref(`comments/${commentId}/replies`).push();
+                newReplyRef.set(reply)
+                    .then(() => {
+                        replyInput.value = "";
+                    })
+                    .catch(error => {
+                        console.error("Error posting reply:", error);
+                    });
+            }
+        }
+
+        // Eliminar comentario
+        function deleteComment(commentId) {
+            if (!currentUser) return;
+            
+            if (confirm("¿Estás seguro de que quieres eliminar este comentario?")) {
+                // Eliminar imagen si existe
+                database.ref(`comments/${commentId}`).once('value').then(snapshot => {
+                    const comment = snapshot.val();
+                    if (comment.imageUrl) {
+                        const imageRef = storage.refFromURL(comment.imageUrl);
+                        imageRef.delete().catch(error => {
+                            console.error("Error deleting image:", error);
+                        });
+                    }
+                    
+                    // Eliminar comentario de la base de datos
+                    database.ref(`comments/${commentId}`).remove();
+                });
+            }
+        }
+
+        // Eliminar respuesta
+        function deleteReply(commentId, replyId) {
+            if (!currentUser) return;
+            
+            if (confirm("¿Estás seguro de que quieres eliminar esta respuesta?")) {
+                database.ref(`comments/${commentId}/replies/${replyId}`).remove();
+            }
+        }
+    </script>
+</body>
+</html>

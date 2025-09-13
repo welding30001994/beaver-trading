@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Motívate a Compartir - VIPFOREX</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@400;500;600;700&family=Exo+2:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon-gold: #ffd700;
+            --neon-platinum: #e5e4e2;
+            --neon-diamond: #b9f2ff;
+            --neon-vip: #ff00ff;
+            --neon-cyan: #00ffff;
+            --dark-cosmic: #0a0a1a;
+            --darker-space: #050510;
+            --deep-space: #03030f;
+            --star-light: rgba(255, 255, 255, 0.9);
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --gold-glow: 0 0 10px var(--neon-gold), 0 0 20px rgba(255, 215, 0, 0.5);
+            --vip-glow: 0 0 15px var(--neon-vip), 0 0 30px rgba(255, 0, 255, 0.4);
+            --cyan-glow: 0 0 15px var(--neon-cyan), 0 0 30px rgba(0, 255, 255, 0.4);
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Exo 2', sans-serif;
+            background-color: var(--deep-space);
+            color: var(--star-light);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                url('https://raw.githubusercontent.com/welding30001994/vip/refs/heads/main/leon_con_fuego_con_el_nombre_vipforex%20(1).jpeg'),
+                radial-gradient(circle at 15% 15%, rgba(255, 215, 0, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 85% 85%, rgba(255, 0, 255, 0.1) 0%, transparent 40%);
+            background-size: cover, 100% 100%, 100% 100%;
+            background-position: center;
+            background-blend-mode: overlay;
+            opacity: 0.2;
+            z-index: -2;
+        }
+        
+        /* Efectos futuristas VIP */
+        .vip-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.05;
+            background: 
+                linear-gradient(0deg, transparent 48%, var(--neon-gold) 49%, var(--neon-gold) 51%, transparent 52%),
+                linear-gradient(90deg, transparent 48%, var(--neon-vip) 49%, var(--neon-vip) 51%, transparent 52%);
+            background-size: 20px 20px;
+            animation: grid-move 20s infinite linear;
+        }
+        
+        @keyframes grid-move {
+            0% { background-position: 0 0; }
+            100% { background-position: 20px 20px; }
+        }
+        
+        .floating-diamonds {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .diamond {
+            position: absolute;
+            opacity: 0.1;
+            background: var(--neon-diamond);
+            width: 10px;
+            height: 10px;
+            transform: rotate(45deg);
+            filter: blur(2px);
+            animation: float-diamond 20s infinite linear;
+        }
+        
+        @keyframes float-diamond {
+            0%, 100% { transform: translate(0, 0) rotate(45deg); opacity: 0.1; }
+            25% { transform: translate(100px, 50px) rotate(90deg); opacity: 0.15; }
+            50% { transform: translate(50px, 100px) rotate(135deg); opacity: 0.2; }
+            75% { transform: translate(-50px, 50px) rotate(180deg); opacity: 0.15; }
+        }
+        
+        .vip-particles {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .vip-particle {
+            position: absolute;
+            background: var(--neon-gold);
+            border-radius: 50%;
+            opacity: 0.4;
+            animation: float-vip linear infinite;
+        }
+        
+        @keyframes float-vip {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.4;
+            }
+            90% {
+                opacity: 0.4;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px);
+                opacity: 0;
+            }
+        }
+        
+        .container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            z-index: 1;
+        }
+        
+        .motivation-card {
+            background: linear-gradient(135deg, rgba(15, 15, 35, 0.8), rgba(25, 15, 45, 0.8));
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            padding: 50px 40px;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            border: 2px solid var(--neon-gold);
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 40px;
+        }
+        
+        .motivation-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--neon-gold), var(--neon-vip), var(--neon-cyan), var(--neon-gold));
+            background-size: 400%;
+            z-index: -1;
+            animation: border-glowing 4s linear infinite;
+            border-radius: 27px;
+            opacity: 0.7;
+        }
+        
+        @keyframes border-glowing {
+            0% { background-position: 0 0; }
+            50% { background-position: 300% 0; }
+            100% { background-position: 0 0; }
+        }
+        
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.2rem;
+            margin-bottom: 25px;
+            background: linear-gradient(135deg, var(--neon-gold), var(--neon-vip), var(--neon-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: var(--vip-glow);
+            letter-spacing: 2px;
+            font-weight: 800;
+        }
+        
+        .highlight {
+            background: linear-gradient(135deg, var(--neon-gold), var(--neon-vip));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 700;
+            text-shadow: 0 0 5px rgba(255, 215, 0, 0.3);
+        }
+        
+        .message {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            margin-bottom: 30px;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
+        }
+        
+        .quote {
+            font-style: italic;
+            padding: 25px;
+            border-left: 4px solid var(--neon-gold);
+            margin: 40px 0;
+            text-align: left;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 0 15px 15px 0;
+            position: relative;
+            overflow: hidden;
+            font-size: 1.2rem;
+        }
+        
+        .quote::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+            animation: shine 3s infinite;
+        }
+        
+        @keyframes shine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        .author {
+            display: block;
+            text-align: right;
+            margin-top: 15px;
+            color: var(--neon-gold);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .benefits {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+            margin: 40px 0;
+        }
+        
+        .benefit {
+            flex: 1;
+            min-width: 220px;
+            background: rgba(25, 25, 45, 0.8);
+            padding: 25px 20px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+        }
+        
+        .benefit:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(255, 215, 0, 0.2);
+            border-color: var(--neon-gold);
+        }
+        
+        .benefit i {
+            font-size: 3rem;
+            color: var(--neon-gold);
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+        }
+        
+        .benefit h3 {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            color: var(--neon-gold);
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .benefit p {
+            font-size: 1.1rem;
+            color: var(--star-light);
+        }
+        
+        .cta-button {
+            background: linear-gradient(135deg, var(--neon-gold), var(--neon-vip));
+            color: var(--dark-cosmic);
+            border: none;
+            padding: 20px 50px;
+            font-size: 1.4rem;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: var(--transition);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.5);
+            font-weight: 700;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1.5px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.7);
+        }
+        
+        .cta-button:active {
+            transform: translateY(2px) scale(1);
+        }
+        
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: 0.6s;
+            z-index: -1;
+        }
+        
+        .cta-button:hover::before {
+            animation: shine 1.5s forwards;
+        }
+        
+        /* Responsive */
+        @media (max-width: 968px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .message {
+                font-size: 1.2rem;
+            }
+            
+            .motivation-card {
+                padding: 40px 30px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .message {
+                font-size: 1.1rem;
+            }
+            
+            .motivation-card {
+                padding: 35px 25px;
+            }
+            
+            .benefit {
+                min-width: 100%;
+            }
+            
+            .cta-button {
+                padding: 18px 40px;
+                font-size: 1.2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .message {
+                font-size: 1rem;
+            }
+            
+            .motivation-card {
+                padding: 30px 20px;
+            }
+            
+            .cta-button {
+                padding: 16px 35px;
+                font-size: 1.1rem;
+            }
+            
+            .quote {
+                padding: 20px;
+                font-size: 1.1rem;
+            }
+            
+            .benefit i {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Efectos futuristas VIP -->
+    <div class="vip-grid"></div>
+    <div class="floating-diamonds">
+        <div class="diamond" style="top: 10%; left: 20%; animation-delay: 0s;"></div>
+        <div class="diamond" style="top: 30%; left: 80%; animation-delay: 5s;"></div>
+        <div class="diamond" style="top: 70%; left: 40%; animation-delay: 10s;"></div>
+        <div class="diamond" style="top: 50%; left: 60%; animation-delay: 15s;"></div>
+    </div>
+    <div class="vip-particles" id="vipParticles"></div>
+    
+    <div class="container">
+        <div class="motivation-card">
+            <h1>¡COMPARTE TU EXPERIENCIA VIP!</h1>
+            
+            <p class="message">
+                En el mundo del trading de élite, <span class="highlight">el conocimiento compartido es poder multiplicado</span>. 
+                Cada señal que compartes no solo ayuda a otros traders, sino que también fortalece tu propia comprensión 
+                del mercado y construye una comunidad más sólida y próspera.
+            </p>
+            
+            <div class="quote">
+                "El éxito en trading no se trata de ganar siempre, sino de aprender constantemente y compartir ese conocimiento para crecer juntos como comunidad de élite."
+                <span class="author">- COMUNIDAD VIPFOREX</span>
+            </div>
+            
+            <p class="message">
+                Al compartir tus señales, análisis y perspectivas exclusivas, te conviertes en una parte vital de nuestra comunidad premium, 
+                ayudando a crear un espacio donde todos podemos prosperar y alcanzar nuevos niveles de éxito financiero.
+            </p>
+            
+            <div class="benefits">
+                <div class="benefit">
+                    <i class="fas fa-users"></i>
+                    <h3>Comunidad Élite</h3>
+                    <p>Fortalece la red de traders profesionales</p>
+                </div>
+                
+                <div class="benefit">
+                    <i class="fas fa-brain"></i>
+                    <h3>Aprendizaje Continuo</h3>
+                    <p>Mejora tus habilidades enseñando a otros</p>
+                </div>
+                
+                <div class="benefit">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Crecimiento Colectivo</h3>
+                    <p>Todos evolucionamos juntos hacia el éxito</p>
+                </div>
+            </div>
+            
+            <button class="cta-button" onclick="window.location.href='señales.html'">
+                <i class="fas fa-bolt"></i> COMPARTIR MI PRIMERA SEÑAL VIP
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Crear efecto de partículas VIP
+        function createVipParticles() {
+            const particleCount = 70;
+            const container = document.getElementById('vipParticles');
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('vip-particle');
+                
+                // Tamaño aleatorio entre 1px y 4px
+                const size = Math.random() * 3 + 1;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // Posición inicial aleatoria
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.bottom = `-${size}px`;
+                
+                // Duración de la animación aleatoria
+                const duration = Math.random() * 25 + 15;
+                particle.style.animationDuration = `${duration}s`;
+                
+                // Retraso aleatorio
+                particle.style.animationDelay = `${Math.random() * 15}s`;
+                
+                // Color aleatorio (dorado, violeta o cian)
+                const colors = ['#ffd700', '#ff00ff', '#00ffff'];
+                const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.background = randomColor;
+                
+                container.appendChild(particle);
+            }
+        }
+        
+        // Efecto de escritura para el título
+        const titleText = "¡COMPARTE TU EXPERIENCIA VIP!";
+        let titleIndex = 0;
+        const titleElement = document.querySelector('h1');
+        
+        function typeTitleText() {
+            if (titleIndex < titleText.length) {
+                titleElement.textContent += titleText.charAt(titleIndex);
+                titleIndex++;
+                setTimeout(typeTitleText, 80);
+            }
+        }
+        
+        // Iniciar efectos cuando la página cargue
+        window.addEventListener('load', () => {
+            createVipParticles();
+            
+            // Iniciar efecto de escritura
+            titleElement.textContent = "";
+            setTimeout(typeTitleText, 1000);
+        });
+    </script>
+</body>
+</html>
